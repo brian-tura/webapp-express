@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 const moviesRouter = require('./routers/movies')
+const dotenv = require('dotenv')
+
+dotenv.config();
+const port = process.env.SERVER_PORT;
 
 app.use(express.static('public'));
 app.use(express.json());
