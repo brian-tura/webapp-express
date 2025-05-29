@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send("HELLO")
+    res.send("Entry Point")
 });
 
 app.use("/movies", moviesRouter);
