@@ -1,7 +1,7 @@
 const connection = require('../data/db');
 
 const index = (req, res) => {
-    const moviesSql = "SELECT * FROM movies"; 
+    const moviesSql = "SELECT * FROM movies";
 
     connection.query(moviesSql, (err, results) => {
         if (err) {
@@ -23,8 +23,8 @@ const show = (req, res) => {
             return res.status(500).json({ error: "Database query failed" })
         }
 
-        if(movieResult.length === 0 || movieResult[0].id === null) {
-            return res.status(404).json({error: 'Not Found'})
+        if (movieResult.length === 0 || movieResult[0].id === null) {
+            return res.status(404).json({ error: 'Not Found' })
         }
 
         const movie = movieResult[0];
@@ -41,7 +41,28 @@ const show = (req, res) => {
     })
 }
 
+const store = (req, res, next) => {
+
+    const { movie_id, name, vote, text } = req.body;
+
+    const sqlReview = `INSERT INTO reviews (movie_id,name,vote,text) VALUES (?, ?, ?, ?)`;
+
+    connection.query(sqlReview, [movie_id, name, vote, text], (err) => {
+        if (err) {
+            console.log(err)
+            return next("dioboia")
+        };
+
+        res.status(201).json({
+            status: 'success',
+            message: 'review added'
+        })
+
+    });
+}
+
 module.exports = {
     index,
-    show
+    show,
+    store
 }

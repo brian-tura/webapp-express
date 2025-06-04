@@ -4,6 +4,7 @@ function notFound(req, res, next) {
         error: "Not Found",
         message: "Pagina non trovata"
     })
+    next()
 }
 
 module.exports = notFound;

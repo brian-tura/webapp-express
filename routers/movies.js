@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const moviesController = require('../controllers/moviesController');
+// const upload = require('../middlewares/multer')
 
 router.get('/', moviesController.index)
 
 router.get('/:id', moviesController.show)
+
+router.post('/reviews', moviesController.store)
 
 module.exports = router;
