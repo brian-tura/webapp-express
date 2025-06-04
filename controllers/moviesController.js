@@ -50,7 +50,7 @@ const store = (req, res, next) => {
     connection.query(sqlReview, [movie_id, name, vote, text], (err) => {
         if (err) {
             console.log(err)
-            return next("dioboia")
+            return next("Error in adding review")
         };
 
         res.status(201).json({
